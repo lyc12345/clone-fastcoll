@@ -63,32 +63,17 @@ void find_collision(const uint32 IV[], uint32 msg1block0[], uint32 msg1block1[],
 // example trivial version with md5 initial value
 int main(int argc, char *argv[])
 {
-	if (argc != 2)
-	{
-		printf("Usage: %s <file_name>\n", argv[0]);
-		return 0;
-	}
 
 	seed32_1 = uint32(time(NULL));
 	seed32_2 = 0x12345678;
 	uint32 IV[4] = { MD5IV[0], MD5IV[1], MD5IV[2], MD5IV[3] };
 
-	ifstream ifs(argv[1], ios::binary);
 	ofstream ofs1("md5_data1", ios::binary);
 	ofstream ofs2("md5_data2", ios::binary);
 
 	uint32 block[16];
-	while (true)
-	{
-		unsigned len = load_block(ifs, block);
-		if (len)
-		{
-			save_block(ofs1, block);
-			save_block(ofs2, block);
-			md5_compress(IV, block);
-		} else
-			break;
-	}
+  for (int i=0;i<4;i++) scanf("%x",&IV[i]);
+  for (int i=0;i<4;i++) printf("%x\n",IV[i]);
 
 	uint32 msg1block0[16];
 	uint32 msg1block1[16];
